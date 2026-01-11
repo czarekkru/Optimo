@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background-color: #333; 
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- HEADER --- */
+.main-header {
+    height: 60px;
+    background-color: olive;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    border-bottom: 3px solid #000;
+}
+
+.text-desktop, .text-tablet, .text-mobile {
+    display: none;
+}
+
+/* --- GRID LAYOUT --- */
+.grid-container {
+    display: grid;
+    height: calc(100vh - 60px);
+    padding: 20px;
+    gap: 20px;
+    background-color: green;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "main center abc";
+}
+
+/* --- BOX (SHAPES) --- */
+.box {
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start;
+    padding-top: 50px;
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s ease;
+}
+
+/* --- BOX (ABC) --- */
+.abc-box { 
+    grid-area: abc; 
+    border: 3px solid #000;
+    font-weight: bold;
+    font-size: 3rem;
+    padding-top: 20px;
+    background-color: white; 
+    color: black;
+    transition: text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.abc-box:hover {
+    text-shadow: 
+        1px 1px 0px #999,
+        2px 2px 0px #888,
+        3px 3px 0px #777,
+        4px 4px 0px #666,
+        5px 5px 10px rgba(0,0,0,0.5);
+}
+
+.main-box { grid-area: main; }
+.center-box { grid-area: center;}
+
+
+/* --- DIAMONDS --- */
+.diamond-group {
+    width: 230px; 
+    height: 230px;
+    position: relative;
+}
+
+.diamond {
+    width: 120px;
+    height: 120px;
+    background-color: red;
+    border: 2px solid #000;
+    transform: rotate(45deg);
+    position: absolute;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.diamond:nth-child(1) { bottom: 0; left: 0; }
+.diamond:nth-child(2) { top: 0; right: 0; }
+
+.diamond:hover {
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+
+/* --- LINES AND ELLIPSE --- */
+.shapes-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.lines-col {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.line {
+    width: 150px;
+    height: 20px;
+    background-color: blue;
+    border: 2px solid #000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.line:hover {
+    transform: scaleX(0.8) scaleY(1.3);
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+
+.ellipse-shape {
+    width: 100px;  
+    height: 90px; 
+    background-color: teal;
+    border: 2px solid #000;
+    border-radius: 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ellipse-shape:hover {
+    transform: rotate(180deg) scaleY(0.6) scaleX(1.1);
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+
+
+/* --- RESPONSIVENESS --- */
+
+/* 1. DESKTOP (> 900px) */
+@media (min-width: 901px) {
+    .text-desktop { display: inline; }
+}
+
+/* 2. TABLET (583px - 900px) */
+@media (max-width: 900px) and (min-width: 583px) {
+    .text-tablet { display: inline; }
+    
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+            "main abc"
+            "center abc";
+    }
+
+    .abc-box {
+        background-color: #d32f2f;
+        color: white;
+        height: 100%;
+    }
+}
+
+/* 3. MOBILE (< 583px) */
+@media (max-width: 582px) {
+    .text-mobile { display: inline; }
+    
+    .grid-container {
+        grid-template-columns: 100%;
+        /* Proportions changed */
+        grid-template-rows: 1.5fr 0.6fr 2.5fr; 
+        grid-template-areas: 
+            "main"
+            "center"
+            "abc";
+    }
+    
+    .abc-box {
+        background-color: blue;
+        color: white;
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+    
+    .main-box { align-items: center; padding-top: 0; }
+    .center-box { align-items: center; padding-top: 0; }
+}
+
+/* --- ANIMATIONS --- */
+.main-header span {
+    animation: fadeInHeader 0.5s ease-in;
+}
+
+@keyframes fadeInHeader {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
